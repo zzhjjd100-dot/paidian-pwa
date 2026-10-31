@@ -468,6 +468,7 @@
         polyBpm: $("#poly-bpm"),
         presetGrid: $("#preset-grid"),
         presetDialog: $("#preset-dialog"),
+        deletePresetDialog: $("#delete-preset-dialog"),
         settingsDialog: $("#settings-dialog"),
         installDialog: $("#install-dialog"),
         toastRegion: $("#toast-region"),
@@ -1275,10 +1276,20 @@
         this.toast(`已保存“${name}”`);
       });
       $("#share-current").addEventListener("click", () => this.shareCurrentSettings());
+      $("#confirm-delete-preset").addEventListener("click", () => this.deletePreset());
     }
 
     renderPresets() {
       if (!this.elements?.presetGrid) return;
+      if (!this.presets.length) {
+        this.elements.presetGrid.innerHTML = `
+          <div class="preset-empty">
+            <span class="preset-empty-icon"><svg class="icon"><use href="#i-star"/></svg></span>
+            <span><strong>还没有练习预设</strong><small>调整节拍后，保存为你的第一个练习计划。</small></span>
+          </div>
+        `;
+        return;
+      }
       this.elements.presetGrid.innerHTML = this.presets.map((preset) => `
         <article class="preset-card" data-preset="${escapeHTML(preset.id)}" tabindex="0" role="button" aria-label="载入预设 ${escapeHTML(preset.name)}">
           <div class="preset-top">
@@ -1289,6 +1300,9 @@
               </button>
               <button class="favorite-button" data-share-preset="${escapeHTML(preset.id)}" aria-label="分享预设">
                 <svg class="icon"><use href="#i-share"/></svg>
+              </button>
+              <button class="favorite-button delete-preset-button" data-delete-preset="${escapeHTML(preset.id)}" aria-label="删除预设">
+                <svg class="icon"><use href="#i-trash"/></svg>
               </button>
             </div>
           </div>
@@ -1325,6 +1339,30 @@
           if (preset) this.sharePreset(preset);
         });
       });
+      $$("[data-delete-preset]", this.elements.presetGrid).forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const preset = this.presets.find((item) => item.id === button.dataset.deletePreset);
+          if (!preset) return;
+          $("#delete-preset-id").value = preset.id;
+          $("#delete-preset-name").textContent = preset.name;
+          this.elements.deletePresetDialog.showModal();
+        });
+      });
+    }
+
+    deletePreset() {
+      const id = $("#delete-preset-id").value;
+      const preset = this.presets.find((item) => item.id === id);
+      if (!preset) {
+        this.elements.deletePresetDialog.close("cancel");
+        return;
+      }
+      this.presets = this.presets.filter((item) => item.id !== id);
+      saveJSON(STORAGE.presets, this.presets);
+      this.renderPresets();
+      this.elements.deletePresetDialog.close("delete");
+      this.toast(`已删除“${preset.name}”`);
     }
 
     loadPreset(preset, card) {

@@ -662,6 +662,24 @@
     </form>
   </dialog>
 
+  <dialog class="modal delete-modal" id="delete-preset-dialog">
+    <form method="dialog">
+      <div class="modal-head">
+        <div><span class="eyebrow">DELETE PRESET</span><h2>删除练习预设</h2></div>
+        <button value="cancel" class="icon-button" aria-label="关闭"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="delete-message">
+        <span class="delete-icon"><svg class="icon"><use href="#i-trash"/></svg></span>
+        <p>确定删除“<strong id="delete-preset-name"></strong>”吗？此操作只会移除本地保存的预设。</p>
+      </div>
+      <input type="hidden" id="delete-preset-id">
+      <div class="modal-actions">
+        <button value="cancel" class="ghost-button">保留</button>
+        <button type="button" class="primary-button danger-button" id="confirm-delete-preset">确认删除</button>
+      </div>
+    </form>
+  </dialog>
+
   <dialog class="modal install-modal" id="install-dialog">
     <form method="dialog">
       <div class="modal-head">
