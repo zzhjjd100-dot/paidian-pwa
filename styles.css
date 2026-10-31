@@ -3331,35 +3331,47 @@ input[type="range"]::-moz-range-thumb {
     padding: 18px 16px 14px;
   }
   .transport-main {
-    grid-template-columns: 1fr;
-    gap: 11px;
-    padding: 9px 0 10px;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 0 11px;
   }
   .tempo-control {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 172px;
-    grid-template-rows: auto auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
     align-items: center;
-    column-gap: 12px;
+    gap: 0;
+    width: 100%;
   }
   .tempo-label-row { grid-column: 1; }
   .bpm-display {
     grid-column: 1;
-    margin: 0;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+    margin: 5px 0 0;
+    gap: 9px;
   }
-  .bpm-value { min-width: 0; }
+  .bpm-value {
+    min-width: 0;
+    justify-content: center;
+  }
   .bpm-value > span { font-size: clamp(58px, 18vw, 78px); }
   .tempo-step { width: 37px; height: 37px; }
   .range-wrap {
     grid-column: 1;
-    padding-left: 46px;
-    margin-top: -8px;
+    padding-left: 0;
+    margin-top: 2px;
   }
   .pulse-section {
-    grid-column: 2;
-    grid-row: 1 / span 3;
-    gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 14px;
+    width: 100%;
+    margin-top: 3px;
   }
   .pulse-orbit {
     width: 160px;
@@ -3375,11 +3387,15 @@ input[type="range"]::-moz-range-thumb {
     height: 8px;
     margin: -4px;
   }
-  .visual-toggles { gap: 5px; }
+  .visual-toggles {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 6px;
+  }
   .visual-toggle {
-    min-height: 26px;
+    min-height: 36px;
     gap: 4px;
-    padding: 0 8px;
+    padding: 0 10px;
     font-size: 8px;
   }
   .visual-toggle .icon { width: 11px; height: 11px; }
@@ -3493,9 +3509,11 @@ input[type="range"]::-moz-range-thumb {
   }
   .poly-center {
     position: absolute;
+    z-index: 3;
+    top: 50%;
     left: 50%;
     width: 58px;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
   }
   .rhythm-ring { width: min(38vw, 155px); min-width: 135px; }
   .rhythm-ring span {
@@ -3574,7 +3592,7 @@ input[type="range"]::-moz-range-thumb {
   .top-actions .today-pill span:not(b) { display: none; }
   .today-pill { gap: 5px; }
   .transport { padding-left: 13px; padding-right: 13px; }
-  .tempo-control { grid-template-columns: minmax(0, 1fr) 151px; column-gap: 6px; }
+  .tempo-control { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .pulse-orbit { width: 148px; min-width: 148px; max-width: 148px; }
   .bpm-display { gap: 4px; }
   .tempo-step { width: 34px; height: 34px; }
