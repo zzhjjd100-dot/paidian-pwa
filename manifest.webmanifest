@@ -1,0 +1,49 @@
+{
+  "name": "拍点 · Tempo Practice",
+  "short_name": "拍点",
+  "description": "为乐器练习设计的离线节拍器，包含复节奏、节奏型、调音器和练习记录。",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#f2efe7",
+  "theme_color": "#f2efe7",
+  "lang": "zh-CN",
+  "categories": ["music", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "打开节拍器",
+      "short_name": "节拍器",
+      "url": "./?view=metronome",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "打开调音器",
+      "short_name": "调音器",
+      "url": "./?view=tuner",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
